@@ -34,11 +34,11 @@
 
 ## POST /email
 
-senderEmail: <string>
-password: <string>
-senderName: <string>
-subject: <string>
-htmlTemplate: <string> (Currently under construction)
+senderEmail: < string >
+password: < string >
+senderName: < string >
+subject: < string >
+htmlTemplate: < string > (Currently under construction)
 recipients: []
-{name: <string>, email: <string>}
+{name: < string >, email: < string >}
 ]
