@@ -20,6 +20,10 @@
 
 - If the POST route works, but emails are not being sent, you may need to change your email password if it hasn't been changed in a while
 
+## POST request body (expects JSON)
+
+![Screen Shot 2022-01-26 at 6 55 35 AM](https://user-images.githubusercontent.com/24352472/151189518-55560440-6293-484b-b480-bb85b1af9e4d.png)
+
 ## Command to run
 
 - $ go run main.go
