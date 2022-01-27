@@ -16,12 +16,25 @@
 
 - Should be similar to other email providers
 
+## Troubleshooting
+
+- If the POST route works, but emails are not being sent, you may need to change your email password if it hasn't been changed in a while
+
 ## Command to run
 
 - $ go run main.go
 
-## Heroku URI
+## Heroku Deployment
 
-## API endpoint
+- https://cryptic-basin-36672.herokuapp.com
 
-- POST "/email"
+## POST /email
+
+senderEmail: <string>
+password: <string>
+senderName: <string>
+subject: <string>
+htmlTemplate: <string> (Currently under construction)
+recipients: []
+{name: <string>, email: <string>}
+]
