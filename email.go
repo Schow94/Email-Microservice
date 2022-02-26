@@ -5,41 +5,41 @@ import (
 	"net/smtp"
 )
 
-func Email(data EmailResponseInput) {
-  // smtp server configuration.
-  smtpHost := "smtp.gmail.com"
-  smtpPort := "587"
+type Error struct {
+	Error string "required"
+}
 
-  // Sender data.
-  from := data.SenderEmail
-  password := data.Password
+func Email(data EmailResponseInput) (string, error) {
+	// smtp server configuration.
+	smtpHost := "smtp.gmail.com"
+	smtpPort := "587"
 
-  fmt.Println("SENDER EMAIL: ", data.SenderEmail)
-  
-  // Authentication.
-  auth := smtp.PlainAuth("", from, password, smtpHost)
-  
-  
+	// Sender data.
+	from := data.SenderEmail
+	password := data.Password
 
-  for i := range data.Recipients{
-    // Receiver email address.
-    to := []string{
-      data.Recipients[i].Email,
-    }
+	// Initialize error we might encounter
+	var err error
 
-    // Message.
-    message := []byte(fmt.Sprintf("To: %s\r\n" + "Subject: %s\r\n" + "\r\n" + "Hi %s,\n\n%s\n \nSincerely,\n%s", data.Recipients[i].Email, data.Subject, data.Recipients[i].Name, data.EmailBody, data.SenderName))
+	// Authentication.
+	auth := smtp.PlainAuth("", from, password, smtpHost)
+	for i := range data.Recipients {
+		// Receiver email address.
+		to := []string{
+			data.Recipients[i].Email,
+		}
 
-    // Sending email.
-    err := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, message)
+		// Message.
+		message := []byte(fmt.Sprintf("To: %s\r\n"+"Subject: %s\r\n"+"\r\n"+"Hi %s,\n\n%s\n \nSincerely,\n%s", data.Recipients[i].Email, data.Subject, data.Recipients[i].Name, data.EmailBody, data.SenderName))
 
-    if err != nil {
-      fmt.Println("ERROR: ", err)
-      return
-    }
+		// Sending email.
+		err := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, message)
 
-  }
+		if err != nil {
+			return "error", err
+		}
 
+	}
 
-  fmt.Println("Email Sent Successfully!")
+	return "Email Sent Successfully", err
 }
